@@ -40,8 +40,10 @@ bot.start()
 // Example: ask the user a question from a Claude agent
 const response = await query({
   prompt: 'Ask the user whether they want a summary or the full report.',
-  model: 'claude-opus-4-5',
-  mcpServers: { 'telegram-ui': ui.server },
+  options: {
+    model: 'claude-opus-4-5',
+    mcpServers: { 'telegram-ui': ui.server },
+  },
 })
 
 console.log(response)

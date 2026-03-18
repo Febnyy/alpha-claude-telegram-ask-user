@@ -31,8 +31,10 @@ bot.launch()
 
 const response = await query({
   prompt: 'Ask the user to choose between option A or option B.',
-  model: 'claude-opus-4-5',
-  mcpServers: { 'telegram-ui': ui.server },
+  options: {
+    model: 'claude-opus-4-5',
+    mcpServers: { 'telegram-ui': ui.server },
+  },
 })
 
 console.log(response)

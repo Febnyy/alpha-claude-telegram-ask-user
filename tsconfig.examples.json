@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "paths": {
+      "alpha-claude-telegram-ask-user": ["./src/index.ts"]
+    }
+  },
+  "include": ["examples/**/*"],
+  "exclude": ["examples/custom-store-example.ts"]
+}
