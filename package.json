@@ -1,0 +1,31 @@
+{
+  "name": "alpha-claude-telegram-ask-user",
+  "version": "0.1.0",
+  "description": "Alpha: MCP bridge for Claude Agent SDK -> Telegram inline keyboards (ask_user tool)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["claude", "telegram", "mcp", "ask-user", "inline-keyboard", "grammy", "claude-agent-sdk"],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.0.14",
+    "better-sqlite3": "^9.6.0",
+    "grammy": "^1.31.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}
