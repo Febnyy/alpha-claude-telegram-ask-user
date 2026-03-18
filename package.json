@@ -1,7 +1,7 @@
 {
   "name": "alpha-claude-telegram-ask-user",
   "version": "0.1.0",
-  "description": "Alpha: MCP bridge for Claude Agent SDK -> Telegram inline keyboards (ask_user tool)",
+  "description": "MCP bridge: Claude Agent SDK ask_user tool -> Telegram inline keyboards",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,19 +13,28 @@
   },
   "scripts": {
     "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "dev": "tsc --watch"
   },
-  "keywords": ["claude", "telegram", "mcp", "ask-user", "inline-keyboard", "grammy", "claude-agent-sdk"],
+  "keywords": ["claude", "mcp", "telegram", "ask-user", "inline-keyboard", "grammy", "telegraf"],
   "license": "MIT",
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.0.14",
-    "better-sqlite3": "^9.6.0",
-    "grammy": "^1.31.0",
-    "zod": "^3.23.0"
+    "@anthropic-ai/claude-agent-sdk": "^0.2.78",
+    "zod": "^4.0.0"
+  },
+  "peerDependencies": {
+    "grammy": ">=1.0.0",
+    "telegraf": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "grammy": { "optional": true },
+    "telegraf": { "optional": true }
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.0.0",
-    "typescript": "^5.5.0"
+    "grammy": "^1.31.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
   }
 }
