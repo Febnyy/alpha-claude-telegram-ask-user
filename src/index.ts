@@ -1,5 +1,5 @@
 // Public API
-export { createTelegramUiServer } from './server.js'
+export { createTelegramUiServer, pendingResolvers, pendingForceReplies } from './server.js'
 export { InMemoryStore } from './store.js'
 export { createGrammyAdapter } from './adapters/grammy.js'
 export { createTelegrafAdapter } from './adapters/telegraf.js'
