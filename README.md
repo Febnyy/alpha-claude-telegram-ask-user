@@ -123,6 +123,33 @@ Wrap your bot instance into the framework-agnostic `TelegramAdapter`.
 
 Default store. No external dependencies.
 
+## Critical gotchas
+
+### 1. grammY SequentialRunner deadlock
+
+grammY's default `SequentialRunner` blocks ALL update fetching while a handler is running. If your `message:text` handler awaits the agent run, `callback_query` updates (button clicks) are never fetched, causing a deadlock: the agent waits for a button click that can never arrive.
+
+**Fix:** Do NOT await the agent call inside your message handler. Use fire-and-forget:
+
+```ts
+bot.on('message:text', async (ctx) => {
+  // DO NOT: await runAgent(...)
+  // DO: fire-and-forget so grammY keeps polling for callback_query updates
+  runAgent(ctx.message.text, { mcpServers: { 'telegram-ui': ui.server } })
+    .catch(err => console.error('agent error', err))
+})
+```
+
+### 2. Stream close timeout
+
+The Claude Code SDK has a default stream close timeout (~60s). If the user takes longer to respond, the stream closes with "Tool permission stream closed before response received".
+
+**Fix:** Set the env var before importing the SDK:
+
+```ts
+process.env.CLAUDE_CODE_STREAM_CLOSE_TIMEOUT = '300000' // 5 minutes
+```
+
 ## Known issues (alpha)
 
 - One `createTelegramUiServer` instance per process (module-level resolver maps)

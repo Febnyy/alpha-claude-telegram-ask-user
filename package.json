@@ -1,6 +1,6 @@
 {
   "name": "alpha-claude-telegram-ask-user",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP bridge: Claude Agent SDK ask_user tool -> Telegram inline keyboards",
   "type": "module",
   "main": "./dist/index.js",
