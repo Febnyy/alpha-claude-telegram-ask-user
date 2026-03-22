@@ -16,7 +16,7 @@ type McpServer = ReturnType<typeof createSdkMcpServer>
 export interface TelegramUiServer {
   server: McpServer
   handleCallbackQuery(callbackData: string, callbackQueryId: string): Promise<void>
-  handleForceReplyMessage(replyToMessageId: number, answerText: string): Promise<void>
+  handleForceReplyMessage(replyToMessageId: number, answerText: string): Promise<boolean>
   destroy(): void
 }
 
@@ -231,14 +231,14 @@ export function createTelegramUiServer(
 
   // -- handleForceReplyMessage ------------------------------------------
 
-  async function handleForceReplyMessage(replyToMessageId: number, answerText: string): Promise<void> {
+  async function handleForceReplyMessage(replyToMessageId: number, answerText: string): Promise<boolean> {
     const questionId = pendingForceReplies.get(replyToMessageId)
-    if (!questionId) return
+    if (!questionId) return false
 
     pendingForceReplies.delete(replyToMessageId)
 
     const q = await store.get(questionId)
-    if (!q || q.answered) return
+    if (!q || q.answered) return false
 
     const updated = { ...q, answered: true }
     await store.set(q.id, updated)
@@ -253,6 +253,7 @@ export function createTelegramUiServer(
       resolver(answerText)
       pendingResolvers.delete(q.id)
     }
+    return true
   }
 
   // -- Cleanup interval (safety net) ------------------------------------
